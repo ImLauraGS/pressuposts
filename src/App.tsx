@@ -1,18 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Checkbox from './components/Checkbox';
+import Total from './components/Total';
+import { ServiceProps } from './types/types';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedServices, setSelectedServices] = useState<ServiceProps[]>([]);
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <Checkbox setSelectedServices={setSelectedServices} />
+      <Total selectedServices={selectedServices} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

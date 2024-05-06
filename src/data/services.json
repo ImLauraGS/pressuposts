@@ -1,7 +1,0 @@
-{
-    "serveis": [
-      { "id": 1, "name": "Fer una campanya SEO", "price": 300 },
-      { "id": 2, "name": "Fer una campanya de publicitat", "price": 400 },
-      { "id": 3, "name": "Fer una pàgina web", "price": 500 }
-    ]
-  }
