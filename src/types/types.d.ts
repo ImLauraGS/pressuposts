@@ -5,6 +5,8 @@ export interface ServiceProps {
     id: string;
     value: string;
     totalApi: any;
+    totalPages: number;
+    totalLanguages: number;
 }
 
 interface SelectedService {

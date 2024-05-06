@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { servicesApi } from '../services/service';
 import { ServiceProps } from '../types/types';
+import SelectForm from './SelectForm';
 
 interface Props {
     setSelectedServices: (selectedService: ServiceProps | null) => void;
+    setTotalPages: (pages: number) => void;
+    setTotalLanguages: (languages: number) => void;
 }
 
-export default function Checkbox({ setSelectedServices }: Props) {
+export default function Checkbox({ setSelectedServices, setTotalPages, setTotalLanguages }: Props) {
+    const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({});
     const serviceApi = servicesApi();
     const [service, setService] = useState<ServiceProps[]>([]);
 
@@ -20,6 +24,11 @@ export default function Checkbox({ setSelectedServices }: Props) {
 
     const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { id, checked } = event.target;
+        setCheckedItems({
+            ...checkedItems,
+            [id]: checked
+        });
+        
         if (checked) {
             const selectedService = service.find(item => item.id === id);
             setSelectedServices(selectedService || null);
@@ -28,6 +37,11 @@ export default function Checkbox({ setSelectedServices }: Props) {
         }
     }
 
+    const handleSelectionChange = (pages: number, languages: number) => {
+        setTotalPages(pages);
+        setTotalLanguages(languages);
+    }
+    
     return (
         <form action="">
             {service.map((item, index) => (
@@ -39,6 +53,7 @@ export default function Checkbox({ setSelectedServices }: Props) {
                         name={item.name}
                         value={item.value}
                         onChange={handleCheck} />
+                       {checkedItems[item.id] && <SelectForm onSelectionChange={handleSelectionChange} />}
                 </div>
             ))}
         </form>
