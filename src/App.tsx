@@ -4,12 +4,12 @@ import Total from './components/Total';
 import { ServiceProps } from './types/types';
 
 function App() {
-  const [selectedServices, setSelectedServices] = useState<ServiceProps[]>([]);
+  const [selectedServices, setSelectedServices] = useState<ServiceProps | null>(null);
 
   return (
     <>
       <Checkbox setSelectedServices={setSelectedServices} />
-      <Total selectedServices={selectedServices} />
+      <Total selectedService={selectedServices} />
     </>
   );
 }

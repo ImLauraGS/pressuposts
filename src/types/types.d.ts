@@ -11,4 +11,5 @@ interface SelectedService {
     id: string;
     price: number;
     value: string;
+    
 }
