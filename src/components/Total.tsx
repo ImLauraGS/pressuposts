@@ -1,28 +1,23 @@
 import React from 'react';
-import { ServiceProps } from '../types/types';
+import { useCheckboxContext } from '../providers/CheckboxProvider';
 
-interface Props {
-    selectedService: ServiceProps | null;
-    totalPages: number;
-    totalLanguages: number;
-}
+export default function Total() {
+    const { selectedService, totalPages, totalLanguages } = useCheckboxContext();
 
-export default function Total({ selectedService, totalPages, totalLanguages }: Props) {
+    // console.log("Selected Service:", selectedService);
+    // console.log("Total Pages:", totalPages);
+    // console.log("Total Languages:", totalLanguages);
+
     const calculateTotalCost = () => {
         if (selectedService) {
-            
             const websiteTotal = (totalPages + totalLanguages) * 30;
             const budgetTotal = websiteTotal + selectedService.price;
-
-            console.log(selectedService.price, totalPages, totalLanguages )
-            
             return { budgetTotal, websiteTotal };
         }
         return { budgetTotal: 0, websiteTotal: 0 };
     }
-    
 
-    const { budgetTotal, websiteTotal } = calculateTotalCost();
+    const { budgetTotal } = calculateTotalCost();
 
     return (
         <section>

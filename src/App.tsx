@@ -1,26 +1,18 @@
-import React, { useState } from 'react';
-import Checkbox from './components/Checkbox';
+import { useState } from 'react';
+import CheckboxService from './components/CheckboxService';
 import Total from './components/Total';
 import { ServiceProps } from './types/types';
+import { CheckboxProvider } from './providers/CheckboxProvider';
+
+
 
 function App() {
-  const [selectedServices, setSelectedServices] = useState<ServiceProps | null>(null);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [totalLanguages, setTotalLanguages] = useState<number>(0); 
 
   return (
-    <>
-      <Checkbox
-        setSelectedServices={setSelectedServices}
-        setTotalPages={setTotalPages}
-        setTotalLanguages={setTotalLanguages}
-      />
-      <Total
-        selectedService={selectedServices}
-        totalPages={totalPages}
-        totalLanguages={totalLanguages}
-      />
-    </>
+    <CheckboxProvider>
+      <CheckboxService/>
+      <Total/>
+    </CheckboxProvider>
   );
 }
 

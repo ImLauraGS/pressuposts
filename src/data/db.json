@@ -2,20 +2,20 @@
     "services": [
         { 
             "id": 1, 
-            "value": "SEO",
+            "value": "Seo",
             "name": "Fer una campanya SEO",
             "price": 300 
         },
 
         {
             "id": 2,
-            "value": "publi",
+            "value": "Ads",
             "name": "Fer una campanya de publicitat",
             "price": 400
         },
         { 
             "id": 3,
-            "value": "web", 
+            "value": "Web", 
             "name": "Fer una pàgina web", 
             "price": 500
         }
