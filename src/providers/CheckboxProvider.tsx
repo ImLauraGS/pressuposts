@@ -6,8 +6,7 @@ export const CheckboxProvider = ({ children }) => {
     const [checkedItems, setCheckedItems] = useState({});
     const [totalPages, setTotalPages] = useState(0);
     const [totalLanguages, setTotalLanguages] = useState(0);
-    const [selectedService, setSelectedService] = useState(null); // Agregar selectedService al estado del contexto
-
+    const [selectedService, setSelectedService] = useState(null); 
     const value = {
         checkedItems,
         setCheckedItems,

@@ -9,31 +9,63 @@ export default function SelectForm() {
     const handlePageChange = (event) => {
         const selectedPages = parseInt(event.target.value);
         setPages(selectedPages);
-        setTotalPages(selectedPages); // Actualiza el total de páginas en el contexto
+        setTotalPages(selectedPages); 
     }
 
     const handleLanguageChange = (event) => {
         const selectedLanguages = parseInt(event.target.value);
         setLanguages(selectedLanguages);
-        setTotalLanguages(selectedLanguages); // Actualiza el total de idiomas en el contexto
+        setTotalLanguages(selectedLanguages); 
     }
-    
-    console.log(pages, languages); // Imprime los valores seleccionados en la consola
+
+    const incrementPages = () => {
+        setPages(pages + 1);
+        setTotalPages(pages + 1);
+    }
+
+    const decrementPages = () => {
+        if (pages > 0) {
+            setPages(pages - 1);
+            setTotalPages(pages - 1);
+        }
+    }
+
+    const incrementLanguages = () => {
+        setLanguages(languages + 1);
+        setTotalLanguages(languages + 1);
+    }
+
+    const decrementLanguages = () => {
+        if (languages > 0) {
+            setLanguages(languages - 1);
+            setTotalLanguages(languages - 1);
+        }
+    }
 
     return (
-        <>
-            <select value={pages} onChange={handlePageChange}>
-                <option value={0}></option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-            </select>
-            <select value={languages} onChange={handleLanguageChange}>
-                <option value={0}></option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-            </select>
-        </>
+        <section className='flex flex-col items-end'>
+            <div>
+                <label>Nombre de pagines: </label>
+                <button type="button" onClick={decrementPages} className='border px-2 rounded-3xl'>-</button>
+                <select value={pages} onChange={handlePageChange} className='appearance-none px-4 py-1 m-3 border rounded-lg'>
+                    <option value={0}> </option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                </select>
+                <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl'>+</button>
+            </div>
+            <div>
+                <label>Nombre de Llenguatges: </label>
+                <button type="button" onClick={decrementLanguages} className='border px-2 rounded-3xl'>-</button>
+                <select value={languages} onChange={handleLanguageChange} className='appearance-none px-4 py-1 m-3 border rounded-lg'>
+                    <option value={0}> </option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                </select>
+                <button type="button" onClick={incrementLanguages} className='border px-2 rounded-3xl'>+</button>
+            </div>
+        </section>
     );
 }

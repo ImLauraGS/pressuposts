@@ -1,17 +1,17 @@
-import { useState } from 'react';
 import CheckboxService from './components/CheckboxService';
+import FormBudget from './components/FormBudget';
 import Total from './components/Total';
-import { ServiceProps } from './types/types';
 import { CheckboxProvider } from './providers/CheckboxProvider';
-
-
 
 function App() {
 
   return (
     <CheckboxProvider>
-      <CheckboxService/>
-      <Total/>
+      <main className="w-full flex flex-col align-center items-center">
+        <CheckboxService/>
+        <Total/>
+        <FormBudget/>
+      </main>
     </CheckboxProvider>
   );
 }

@@ -4,9 +4,7 @@ import { useCheckboxContext } from '../providers/CheckboxProvider';
 export default function Total() {
     const { selectedService, totalPages, totalLanguages } = useCheckboxContext();
 
-    // console.log("Selected Service:", selectedService);
-    // console.log("Total Pages:", totalPages);
-    // console.log("Total Languages:", totalLanguages);
+    console.log(selectedService, totalPages, totalLanguages);
 
     const calculateTotalCost = () => {
         if (selectedService) {

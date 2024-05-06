@@ -13,50 +13,59 @@ import {
 export default function CheckboxService() {
     const serviceApi = servicesApi();
     const [service, setService] = useState<ServiceProps[]>([]);
-    const { checkedItems, setCheckedItems, setSelectedService } = useCheckboxContext();
+    const { checkedItems, setCheckedItems, setSelectedService, setTotalPages, setTotalLanguages } = useCheckboxContext();
 
     useEffect(() => {
         serviceApi.getAll()
             .then((res) => res.data)
             .then((data) => {
+              console.log("Service Data:", data);
                 setService(data);
             });
     }, []);
 
     const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { id, checked } = event.target;
-
-      const updatedCheckedItems = {
-        ...checkedItems,
-        [id]: checked
-    };
-
-    setCheckedItems(updatedCheckedItems);
-      
+      const updatedCheckedItems = Object.fromEntries(
+          service.map(item => [item.id, false])
+      );
+      updatedCheckedItems[id] = checked;
+      setCheckedItems(updatedCheckedItems);
+  
       if (checked) {
-        console.log(service);
-          const selectedService = service.find(item => 
-            item.id == id );
+
+          const selectedService = service.find(item => item.id == id);
           setSelectedService(selectedService || null);
+          setTotalPages(selectedService?.pages || 0);
+          setTotalLanguages(selectedService?.languages || 0);
+
+          console.log(updatedCheckedItems);
+      console.log("Selected Service:", selectedService);
+      console.log("ID:", id);
       } else {
-        setSelectedService(null);
-      }
+          setSelectedService(null);
+          setTotalPages(0);
+          setTotalLanguages(0);
+      } 
   }
+
     return (
         <form action="">
             {service.map((item, index) => (
-                <Card key={index} className="mt-6 w-[50rem] flex-row">
-                    <CardBody className='flex-row w-full justufy-between'>
-                        <Typography variant="h5" color="blue-gray" className="mb-2">
-                            {item.value}
+                <Card key={index} className="mt-6 w-[50rem] items-end">
+                    <CardBody className='w-[100%] flex flex-row justify-between items-center'>
+                        <div>
+                            <Typography variant="h2" color="blue-gray" className="mb-2">
+                                {item.value}
+                            </Typography>
+                            <Typography>
+                                {item.name}
+                            </Typography>
+                        </div>
+                        <Typography variant="h3" color="blue-gray" className="mb-2">
+                            {item.price}€
                         </Typography>
-                        <Typography>
-                            {item.name}
-                        </Typography>
-                        <Typography variant="h5" color="blue-gray" className="mb-2">
-                            {item.price}
-                        </Typography>
-                        <Checkbox 
+                        <Checkbox
                             label="Afegir"
                             id={item.id}
                             name={item.name}
@@ -64,8 +73,10 @@ export default function CheckboxService() {
                             checked={checkedItems[item.id] || false}
                             onChange={handleCheck}
                         />
-                        {checkedItems[item.id] && <SelectForm />}
                     </CardBody>
+                    <div className='p-6'>
+                        {checkedItems[item.id] && <SelectForm />}
+                    </div>
                 </Card>
             ))}
         </form>
