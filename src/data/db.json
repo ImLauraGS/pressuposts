@@ -1,26 +1,45 @@
 {
-    "services": [
-        { 
-            "id": 1, 
-            "value": "Seo",
-            "name": "Fer una campanya SEO",
-            "price": 300 
-        },
-
-        {
-            "id": 2,
-            "value": "Ads",
-            "name": "Fer una campanya de publicitat",
-            "price": 400
-        },
-        { 
-            "id": 3,
-            "value": "Web", 
-            "name": "Fer una pàgina web", 
-            "price": 500
-        }
-    ],
-    "budget": [
-        
-    ]
+  "services": [
+    {
+      "id": 1,
+      "value": "Seo",
+      "name": "Fer una campanya SEO",
+      "price": 300
+    },
+    {
+      "id": 2,
+      "value": "Ads",
+      "name": "Fer una campanya de publicitat",
+      "price": 400
+    },
+    {
+      "id": 3,
+      "value": "Web",
+      "name": "Fer una pàgina web",
+      "price": 500
+    }
+  ],
+  "budget": [
+    {
+      "id": "40db",
+      "name": "Laura",
+      "phone": "asdasd",
+      "email": "asdasd",
+      "selectedService": 1,
+      "totalBudget": 420
+    },
+    {
+      "id": "3a56",
+      "name": "Laura",
+      "phone": "asdasd",
+      "email": "asdasdasd",
+      "selectedService": {
+        "id": 2,
+        "value": "Ads",
+        "name": "Fer una campanya de publicitat",
+        "price": 400
+      },
+      "totalBudget": 490
+    }
+  ]
 }

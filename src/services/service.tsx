@@ -27,5 +27,9 @@ export const totalApi =() => {
             console.error("Error posting total:", error);
             throw error;
         }
-    }
+    };
+
+    return {
+        postTotal
+    };
 }

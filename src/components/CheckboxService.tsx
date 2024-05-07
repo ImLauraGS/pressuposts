@@ -38,10 +38,7 @@ export default function CheckboxService() {
           setSelectedService(selectedService || null);
           setTotalPages(selectedService?.pages || 0);
           setTotalLanguages(selectedService?.languages || 0);
-
-          console.log(updatedCheckedItems);
-      console.log("Selected Service:", selectedService);
-      console.log("ID:", id);
+     
       } else {
           setSelectedService(null);
           setTotalPages(0);

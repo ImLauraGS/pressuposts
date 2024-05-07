@@ -2,9 +2,7 @@ import React from 'react';
 import { useCheckboxContext } from '../providers/CheckboxProvider';
 
 export default function Total() {
-    const { selectedService, totalPages, totalLanguages } = useCheckboxContext();
-
-    console.log(selectedService, totalPages, totalLanguages);
+    const { selectedService, totalPages, totalLanguages, totalBudget } = useCheckboxContext();
 
     const calculateTotalCost = () => {
         if (selectedService) {
@@ -20,7 +18,7 @@ export default function Total() {
     return (
         <section>
             <h2>Total Price</h2>
-            <p>{budgetTotal}€</p>
+            <p>Budget Total: {budgetTotal}€</p>
         </section>
     );
 }
