@@ -7,6 +7,8 @@ export interface ServiceProps {
     totalApi: any;
     totalPages: number;
     totalLanguages: number;
+    pages: number; 
+    languages: number;
 }
 
 interface SelectedService {

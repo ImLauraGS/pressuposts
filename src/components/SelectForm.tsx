@@ -6,13 +6,13 @@ export default function SelectForm() {
     const [languages, setLanguages] = useState(0);
     const { setTotalPages, setTotalLanguages } = useCheckboxContext();
 
-    const handlePageChange = (event) => {
+    const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedPages = parseInt(event.target.value);
         setPages(selectedPages);
         setTotalPages(selectedPages); 
     }
 
-    const handleLanguageChange = (event) => {
+    const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedLanguages = parseInt(event.target.value);
         setLanguages(selectedLanguages);
         setTotalLanguages(selectedLanguages); 
