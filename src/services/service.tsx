@@ -29,7 +29,14 @@ export const totalApi =() => {
         }
     };
 
-    return {
-        postTotal
+    const getTotal = async () => {
+        const response = await axios.get(baseUrl)
+        return response
     };
+
+    return {
+        postTotal,
+        getTotal 
+    };
+ 
 }

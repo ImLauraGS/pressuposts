@@ -10,16 +10,16 @@ import { useCheckboxContext } from '../providers/CheckboxProvider';
 
 export default function FormBudget() {
     const totalService = totalApi(); 
-    const { selectedService, totalBudget } = useCheckboxContext(); // Obtener selectedService y totalBudget del contexto
+    const { selectedService, budgetTotal } = useCheckboxContext();
 
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
         email: "",
         selectedService: selectedService ? selectedService : null,
-        totalBudget: 0,
+        budgetTotal: 0,
     });
-    
+
     useEffect(() => {
         if (selectedService) {
             setFormData(prevFormData => ({
@@ -28,6 +28,15 @@ export default function FormBudget() {
             }));
         }
     }, [selectedService]);
+
+    useEffect(() => {
+        if (budgetTotal !== 0) {
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                budgetTotal: budgetTotal,
+            }));
+        }
+    }, [budgetTotal]);
 
     const handleChange = (e) => {
         setFormData({
@@ -39,17 +48,15 @@ export default function FormBudget() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Actualizar formData con totalBudget antes de enviarlo al servidor
-            const updatedFormData = {
+            const response = await totalService.postTotal({
                 ...formData,
-                totalBudget: totalBudget,
-            };
-
-            const response = await totalService.postTotal(updatedFormData); 
+                budgetTotal: budgetTotal, // Asegurar que se incluya el valor actualizado de budgetTotal
+            }); 
             console.log('Data sent:', response);
         } catch (error) {
             console.error('Error posting data:', error);
         }
+        console.log('budgetTotal:', budgetTotal)
     };
 
     return (

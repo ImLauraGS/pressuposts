@@ -3,6 +3,7 @@ import CheckboxService from '../components/CheckboxService';
 import FormBudget from '../components/FormBudget';
 import Total from '../components/Total';
 import { CheckboxProvider } from '../providers/CheckboxProvider';
+import ListPressupost from '../components/ListPressupost';
 
 export default function Pressupost() {
   return (
@@ -14,6 +15,7 @@ export default function Pressupost() {
             <CheckboxService/>
             <Total/>
             <FormBudget/>
+            <ListPressupost/>
           </main>
         </CheckboxProvider>
       );

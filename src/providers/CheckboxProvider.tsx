@@ -1,58 +1,56 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
 import { ServiceProps } from '../types/types';
 
 interface CheckboxContextType {
     checkedItems: Record<string, boolean>;
-    setCheckedItems: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
-    totalPages: number;
-    setTotalPages: React.Dispatch<React.SetStateAction<number>>;
-    totalLanguages: number;
-    setTotalLanguages: React.Dispatch<React.SetStateAction<number>>;
+    setCheckedItems: Dispatch<SetStateAction<Record<string, boolean>>>;
+    services: ServiceData[];
+    setServices: Dispatch<SetStateAction<ServiceData[]>>;
     selectedService: ServiceProps | null;
-    setSelectedService: React.Dispatch<React.SetStateAction<ServiceProps | null>>;
-    totalBudget: number; 
+    setSelectedService: Dispatch<SetStateAction<ServiceProps | null>>;
+    budgetTotal: number; // Agregar budgetTotal al contexto
+    setBudgetTotal: Dispatch<SetStateAction<number>>;
+}
+
+interface ServiceData {
+    id: string;
+    pages: number;
+    languages: number;
 }
 
 const CheckboxContext = createContext<CheckboxContextType>({
     checkedItems: {},
     setCheckedItems: () => {},
-    totalPages: 0,
-    setTotalPages: () => {},
-    totalLanguages: 0,
-    setTotalLanguages: () => {},
+    services: [],
+    setServices: () => {},
     selectedService: null,
     setSelectedService: () => {},
-    totalBudget: 0, 
+    budgetTotal: 0, // Establecer el valor predeterminado de budgetTotal
+    setBudgetTotal: () => {},
+    
 });
 
 export const CheckboxProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
-    const [totalPages, setTotalPages] = useState<number>(0);
-    const [totalLanguages, setTotalLanguages] = useState<number>(0);
+    const [services, setServices] = useState<ServiceData[]>([]);
     const [selectedService, setSelectedService] = useState<ServiceProps | null>(null);
-    const [totalBudget, setTotalBudget] = useState<number>(0); // Nuevo estado para totalBudget
+    const [budgetTotal, setBudgetTotal] = useState<number>(0);
 
-    
-    useEffect(() => {
-        if (selectedService) {
-            const websiteTotal = (totalPages + totalLanguages) * 30;
-            const budgetTotal = websiteTotal + selectedService.price;
-            setTotalBudget(budgetTotal);
-        } else {
-            setTotalBudget(0);
-        }
-    }, [selectedService, totalPages, totalLanguages]);
+    const defaultServiceData: ServiceData = {
+        id: '', 
+        pages: 0,
+        languages: 0,
+    };
 
     const value = {
         checkedItems,
         setCheckedItems,
-        totalPages,
-        setTotalPages,
-        totalLanguages,
-        setTotalLanguages,
+        services: services.map(service => ({ ...defaultServiceData, ...service })), // Asegúrate de copiar todos los servicios con valores predeterminados
+        setServices,
         selectedService,
         setSelectedService,
-        totalBudget, 
+        budgetTotal, // Agregar budgetTotal al valor del contexto
+        setBudgetTotal,
     };
 
     return (

@@ -1,19 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckboxContext } from '../providers/CheckboxProvider';
+import { servicesApi } from '../services/service';
+import { ServiceProps } from '../types/types';
 
 export default function Total() {
-    const { selectedService, totalPages, totalLanguages, totalBudget } = useCheckboxContext();
+    const serviceApi = servicesApi();
+    const [dataApi, setDataApi] = useState<ServiceProps[]>([]);
+    const { services, setBudgetTotal, budgetTotal } = useCheckboxContext();
 
-    const calculateTotalCost = () => {
-        if (selectedService) {
-            const websiteTotal = (totalPages + totalLanguages) * 30;
-            const budgetTotal = websiteTotal + selectedService.price;
-            return { budgetTotal, websiteTotal };
+    useEffect(() => {
+        serviceApi.getAll()
+            .then((res) => res.data)
+            .then((data) => {
+                console.log("Service Data:", data);
+                setDataApi(data);
+            });
+    }, []); 
+
+    useEffect(() => {
+        const calculateTotalCost = () => {
+            let totalServices = 0;
+
+            services.forEach(dataApi => {
+                totalServices += dataApi.price; 
+            });
+
+            let totalPages = 0;
+            let totalLanguages = 0;
+
+            services.forEach(service => {
+                totalPages += service.pages; 
+                totalLanguages += service.languages; 
+            });
+
+            const websiteTotal = (totalPages + totalLanguages) * 30; 
+
+            const budgetTotal = totalServices + websiteTotal; 
+
+            return budgetTotal;
         }
-        return { budgetTotal: 0, websiteTotal: 0 };
-    }
 
-    const { budgetTotal } = calculateTotalCost();
+        const budgetTotal = calculateTotalCost();
+        setBudgetTotal(budgetTotal);
+    }, [services, setBudgetTotal]);
 
     return (
         <section>
