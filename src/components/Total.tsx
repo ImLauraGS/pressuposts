@@ -28,9 +28,9 @@ export default function Total() {
             let totalPages = 0;
             let totalLanguages = 0;
 
-            services.forEach(service => {
-                totalPages += service.pages; 
-                totalLanguages += service.languages; 
+            services.forEach(item => {
+                totalPages += item.pages; 
+                totalLanguages += item.languages; 
             });
 
             const websiteTotal = (totalPages + totalLanguages) * 30; 

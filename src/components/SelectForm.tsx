@@ -107,6 +107,8 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
         }
     }
 
+    console.log('Services:', services);
+
     return (
         <section className='flex flex-col items-end'>
             <div>
