@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCheckboxContext } from '../providers/CheckboxProvider';
+import { Modal } from './Modal';
 
 export default function SelectForm({ serviceId }: { serviceId: string }) {
     const { services, setServices } = useCheckboxContext();
@@ -117,12 +118,19 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
                 <input type="number" value={service.pages} onChange={handlePageChange} className='px-4 py-1 m-3 border rounded-lg' min={0} />
                 <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl'>+</button>
             </div>
+            <Modal 
+                title='Número de pagines' 
+                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€." />
             <div>
                 <label>Nombre de Lenguajes: </label>
                 <button type="button" onClick={decrementLanguages} className='border px-2 rounded-3xl'>-</button>
                 <input type="number" value={service.languages} onChange={handleLanguageChange} className='px-4 py-1 m-3 border rounded-lg' min={0} />
                 <button type="button" onClick={incrementLanguages} className='border px-2 rounded-3xl'>+</button>
             </div>
+            <Modal 
+                title='Número de llenguatges' 
+                text="Afegeix les llenguatges que tindrà el teu projecte. El cost de cada llenguatge és de 30€." 
+                />
         </section>
     );
 }

@@ -50,11 +50,11 @@ export default function ListPressupost() {
                                 {item.phone}
                             </Typography>
                             <Typography>
-                                {item.selectedService.price}
+                                {item.services.price}
                             </Typography>
                         </div>
                         <Typography variant="h3" color="blue-gray" className="mb-2">
-                            {item.selectedService.value}
+                            {item.services.value}
                         </Typography>
                     </CardBody>
                 </Card>
