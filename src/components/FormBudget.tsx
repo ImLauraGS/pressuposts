@@ -7,16 +7,20 @@ import {
 import { totalApi } from "../services/service";
 import { useState, useEffect } from "react";   
 import { useCheckboxContext } from '../providers/CheckboxProvider';
+import { DialogConfirm } from "./DialogConfirm";
 
 export default function FormBudget() {
     const totalService = totalApi(); 
     const { selectedService, budgetTotal, services } = useCheckboxContext();
+    const [showModal, setShowModal] = useState(false); 
+    const [modalMessage, setModalMessage] = useState(""); 
+
 
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
         email: "",
-        date: "", // Afegir el camp per la data
+        date: "", 
         services: services ? services : null,
         budgetTotal: 0,
     });
@@ -62,9 +66,18 @@ export default function FormBudget() {
                 budgetTotal: budgetTotal, 
             }); 
             console.log('Data sent:', response);
+            setModalMessage("El pressupost s'ha guardat correctament."); 
+            setShowModal(true); 
         } catch (error) {
             console.error('Error posting data:', error);
+            setModalMessage("Hi ha hagut un error en desar el pressupost."); 
+            setShowModal(true); 
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        window.location.reload();
     };
 
     return (
@@ -109,6 +122,7 @@ export default function FormBudget() {
                     Sol·licitar Pressupost
                 </Button>
             </form>
+            <DialogConfirm isOpen={showModal} onClose={handleCloseModal} message={modalMessage} />
         </Card>
     );
 }
