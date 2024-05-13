@@ -16,6 +16,7 @@ export default function FormBudget() {
         name: "",
         phone: "",
         email: "",
+        date: "", // Afegir el camp per la data
         services: services ? services : null,
         budgetTotal: 0,
     });
@@ -38,6 +39,14 @@ export default function FormBudget() {
         }
     }, [budgetTotal]);
 
+    useEffect(() => {
+        const currentDate = new Date().toISOString().split('T')[0];
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            date: currentDate,
+        }));
+    }, []);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -59,47 +68,44 @@ export default function FormBudget() {
     };
 
     return (
-        <Card color="transparent">
-            <Typography variant="h4" color="blue-gray">
+        <Card color="transparent" className="w-[70rem] p-10 gap-4">
+            <Typography variant="h3" color="blue-gray">
                 Demanar Pressupost
             </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleSubmit}>
-                <div className="mb-1 flex flex-col gap-6">
+            <form className="flex flex-row gap-9 items-center justify-around" onSubmit={handleSubmit}>
                     <Input
                         size="lg"
-                        placeholder="Nom"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                            className: "before:content-none after:content-none",
-                        }}
+                        label="Nom"
+                        type="text"
+                        variant="outlined"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                     />
                     <Input
                         size="lg"
-                        placeholder="Telefon"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                            className: "before:content-none after:content-none",
-                        }}
+                        label="Telefon"
+                        type="number"
+                        variant="outlined"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                     />
                     <Input
                         size="lg"
-                        placeholder="Email"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                            className: "before:content-none after:content-none",
-                        }}
+                        label="Email"
+                        type="email"
+                        variant="outlined"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                     />
-                </div>
-                <Button type="submit" className="mt-6" fullWidth>
+
+                    <Button 
+                    type="submit" 
+                    className="" 
+                    color="green"
+                    fullWidth>
                     Sol·licitar Pressupost
                 </Button>
             </form>

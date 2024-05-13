@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Card, CardBody, Input } from "@material-tailwind/react";
+import { Typography, Card, CardBody, Input, ListItem, Button,ButtonGroup } from "@material-tailwind/react";
 import { totalApi } from "../services/service";
 import { ServiceProps } from "../types/types";
+import {
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
 export default function ListPressupost() {
   const totalService = totalApi();
   const [budgets, setBudgets] = useState<ServiceProps[]>([]);
   const [sortedBudgets, setSortedBudgets] = useState<ServiceProps[]>([]);
-  const [sortBy, setSortBy] = useState<string>(""); 
-  const [searchTerm, setSearchTerm] = useState<string>(""); 
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [sortByPriceActive, setSortByPriceActive] = useState<boolean>(false);
+  const [sortDirection, setSortDirection] = useState<string>("asc"); // Estado para el orden ascendente/descendente
 
   useEffect(() => {
     totalService.getTotal()
@@ -20,24 +24,31 @@ export default function ListPressupost() {
   }, []);
 
   const sortAlphabetically = () => {
-    const sorted = [...budgets].sort((a, b) => a.name.localeCompare(b.name));
+    const direction = sortDirection === "asc" ? 1 : -1;
+    const sorted = [...budgets].sort((a, b) => direction * a.name.localeCompare(b.name));
     setSortedBudgets(sorted);
-    setSortBy("Alfabèticament");
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc"); 
+    setSortByPriceActive(false);
   };
 
   const sortByDate = () => {
+    const direction = sortDirection === "asc" ? 1 : -1;
     const sorted = [...budgets].sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-      return dateA.getTime() - dateB.getTime();
+      return direction * (dateA.getTime() - dateB.getTime());
     });
     setSortedBudgets(sorted);
-    setSortBy("Per Data");
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    setSortByPriceActive(false);
   };
 
-  const resetOrder = () => {
-    setSortedBudgets([]);
-    setSortBy("");
+  const sortPrice = () => {
+    const direction = sortDirection === "asc" ? 1 : -1;
+    const sorted = [...budgets].sort((a, b) => direction * (a.budgetTotal - b.budgetTotal));
+    setSortedBudgets(sorted);
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    setSortByPriceActive(true);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,58 +63,71 @@ export default function ListPressupost() {
   );
 
   return (
-    <div className="mb-8 flex items-center justify-between gap-8">
-      <Typography variant="h5" color="blue-gray">
-        Pressupostos en curs
+    <div className="mb-8 w-[70rem] mt-16 flex flex-col justify-between gap-8">
+      <Typography variant="h2" color="blue-gray">
+        Pressupostos en curs:
       </Typography>
-      <div className="flex items-center justify-end gap-4">
-     
-        <button onClick={sortAlphabetically} className="btn">
-          Ordenar Alfabèticament
-        </button>
-        <button onClick={sortByDate} className="btn">
-          Ordenar per Data
-        </button>
-        <button onClick={resetOrder} className="btn">
-          Reinicialitzar Ordre
-        </button>
-      </div>
       <div className="flex flex-col items-center justify-between gap-4">
-   
-        {sortBy && (
-          <Typography variant="subtitle1" color="blue-gray">
-            Ordenat {sortBy}
-          </Typography>
-        )}
+        <div className="flex w-full justify-end gap-4">
+          <div className="w-full md:w-72">
+            <Input
+                label="Cercar per nom..."
+                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                type="text"
+                onChange={handleSearchChange}
+                value={searchTerm}
+              />
+          </div>
 
-        <Input
-          type="text"
-          placeholder="Cercar per nom..."
-          onChange={handleSearchChange}
-          value={searchTerm}
-          className="mt-4"
-        />
+        <ButtonGroup variant="text">
+        <Button onClick={sortAlphabetically} className="btn">
+          Nom
+        </Button>
+        <Button onClick={sortByDate} className="btn">
+          Data
+        </Button>
+        <Button onClick={sortPrice} className="btn">
+          Import
+        </Button>
+        </ButtonGroup>
+      </div>
+
         {filteredBudgets.map((item, index) => (
-          <Card key={index} className="mt-6 w-[50rem] items-end">
-            <CardBody className="w-[100%] flex flex-row justify-between items-center">
-              <div>
-                <Typography variant="h2" color="blue-gray" className="mb-2">
+          <Card key={index} className="mt-6 w-full bg-deep-purple-50 items-start" >
+            <CardBody className="w-[100%] flex flex-row justify-between align-top items-center">
+              <div className="flex flex-col justify-start">
+                <Typography variant="h4" color="blue-gray" className="mb-2">
                   {item.name}
                 </Typography>
-                <Typography variant="h2" color="blue-gray" className="mb-2">
-                  {item.date}
-                </Typography>
-                <Typography variant="h2" color="blue-gray" className="mb-2">
+                <Typography variant="h6"  className="mb-2 font-normal">
                   {item.email}
                 </Typography>
-                <Typography variant="h2" color="blue-gray" className="mb-2">
+                <Typography variant="h6" className="mb-2 font-normal">
                   {item.phone}
                 </Typography>
-                <Typography>{item.services.price}</Typography>
+                <Typography variant="h6" className="mb-2 font-normal">
+                  Data: {item.date}
+                </Typography>
+                </div>
+                <div className="flex flex-col items- justify-start">
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                  Serveis contractats:
+                </Typography>
+                {item.services.map((service, index) => (
+                  <li key={index} variant="h6" className="mb-2 text-black">
+                    {service.value}
+                  </li>
+                ))}
+                </div>
+                <div>
+                <Typography variant="h5" className="mb-2">
+                  Total:
+                </Typography>
+                <Typography variant="h2" color="blue-gray" className="mb-2">
+                {item.budgetTotal}€
+                </Typography>
               </div>
-              <Typography variant="h3" color="blue-gray" className="mb-2">
-                {item.services.value}
-              </Typography>
+              
             </CardBody>
           </Card>
         ))}

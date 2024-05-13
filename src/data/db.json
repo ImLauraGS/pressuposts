@@ -4,60 +4,78 @@
       "id": "1",
       "value": "Seo",
       "name": "Fer una campanya SEO",
+      "description": "Programació d'una web responsive completa",
       "price": 300
     },
     {
       "id": "2",
       "value": "Ads",
       "name": "Fer una campanya de publicitat",
+      "description": "Programació d'una web responsive completa",
       "price": 400
     },
     {
       "id": "3",
       "value": "Web",
       "name": "Fer una pàgina web",
+      "description": "Programació d'una web responsive completa",
       "price": 500
     }
   ],
   "budget": [
     {
-      "id": "23ab",
-      "name": "dfd",
-      "phone": "dfdf",
-      "email": "dfdf",
+      "id": "7cea",
+      "name": "Laura",
+      "phone": "55555555",
+      "email": "lau@gmail.com",
+      "date": "2024-05-13",
       "services": [
         {
-          "id": "1",
-          "pages": 2,
-          "languages": 2,
-          "value": "Seo",
-          "name": "Fer una campanya SEO",
-          "price": 300
-        },
-        {
           "id": "2",
-          "pages": 2,
-          "languages": 2,
+          "pages": 1,
+          "languages": 1,
           "value": "Ads",
           "name": "Fer una campanya de publicitat",
+          "description": "Programació d'una web responsive completa",
           "price": 400
         }
       ],
-      "budgetTotal": 940
+      "budgetTotal": 460
     },
     {
-      "id": "6ac8",
-      "name": "la",
-      "phone": "la",
-      "email": "la",
+      "id": "8a6d",
+      "name": "dsd",
+      "phone": "55555555",
+      "email": "lau@gmail.com",
+      "date": "2024-04-13",
       "services": [
         {
           "id": "1",
           "pages": 1,
-          "languages": 1,
+          "languages": 2,
           "value": "Seo",
           "name": "Fer una campanya SEO",
+          "description": "Programació d'una web responsive completa",
           "price": 300
+        }
+      ],
+      "budgetTotal": 390
+    },
+    {
+      "id": "93bd",
+      "name": "fvc",
+      "phone": "55555555",
+      "email": "lau@gmail.com",
+      "date": "2024-05-13",
+      "services": [
+        {
+          "id": "3",
+          "pages": 1,
+          "languages": 1,
+          "value": "Web",
+          "name": "Fer una pàgina web",
+          "description": "Programació d'una web responsive completa",
+          "price": 500
         },
         {
           "id": "2",
@@ -65,10 +83,11 @@
           "languages": 1,
           "value": "Ads",
           "name": "Fer una campanya de publicitat",
+          "description": "Programació d'una web responsive completa",
           "price": 400
         }
       ],
-      "budgetTotal": 820
+      "budgetTotal": 1020
     }
   ]
 }

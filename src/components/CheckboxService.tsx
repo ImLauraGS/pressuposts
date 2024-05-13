@@ -33,11 +33,11 @@ export default function CheckboxService() {
         }));
 
         if (checked) {
-            // Agregar el servicio completo, incluidos los detalles de pages y languages
+
             setServices(prevServices => [...prevServices, item]);
             setSelectedService(item);
         } else {
-            // Filtrar el servicio basado en el ID
+
             setServices(prevServices => prevServices.filter(service => service.id !== item.id));
             setSelectedService(null);
         }
@@ -46,14 +46,14 @@ export default function CheckboxService() {
     return (
         <form action="">
             {dataApi.map((item, index) => (
-                <Card key={index} className="mt-6 w-[50rem] items-end">
+                <Card key={index} className="mb-6 bg-amber-50 w-[70rem] items-end">
                     <CardBody className='w-[100%] flex flex-row justify-between items-center'>
                         <div>
                             <Typography variant="h2" color="blue-gray" className="mb-2">
                                 {item.value}
                             </Typography>
                             <Typography>
-                                {item.name}
+                                {item.description}
                             </Typography>
                         </div>
                         <Typography variant="h3" color="blue-gray" className="mb-2">

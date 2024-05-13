@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
-
+import { Header } from "../components/Header";
 
 export default function Home() {
-    return (
-        <div>
-            <h1>Home</h1>
-            <Link to="/pressupost">
-                <button>Calculadora Pressupost</button>
-            </Link>
-        </div>
-    )
+  return (
+    <body className="bg-gray-100 w-dvw h-screen flex flex-col">
+      <Header />
+      <div className="flex-grow flex justify-center items-center">
+        <Link
+          to="/pressupost"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Calculadora Pressupost
+        </Link>
+      </div>
+    </body>
+  );
 }

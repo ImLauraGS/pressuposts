@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCheckboxContext } from '../providers/CheckboxProvider';
 import { servicesApi } from '../services/service';
 import { ServiceProps } from '../types/types';
+import { Typography } from "@material-tailwind/react";
 
 export default function Total() {
     const serviceApi = servicesApi();
@@ -45,9 +46,10 @@ export default function Total() {
     }, [services, setBudgetTotal]);
 
     return (
-        <section>
-            <h2>Total Price</h2>
-            <p>Budget Total: {budgetTotal}€</p>
+        <section className='flex w-[70%] justify-end item-end mb-20 mt-5'>
+            <Typography variant="h2" color="blue-gray">
+            Preu pressupostat: {budgetTotal}€
+          </Typography>
         </section>
     );
 }

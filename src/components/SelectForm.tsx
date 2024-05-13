@@ -24,8 +24,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
             ...prevService,
             pages: selectedPages,
         }));
-
-        // Actualizar el contexto con el nuevo valor de páginas
         setServices(prevServices =>
             prevServices.map(s =>
                 s.id === serviceId ? { ...s, pages: selectedPages } : s
@@ -40,7 +38,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
             languages: selectedLanguages,
         }));
 
-        // Actualizar el contexto con el nuevo valor de lenguajes
         setServices(prevServices =>
             prevServices.map(s =>
                 s.id === serviceId ? { ...s, languages: selectedLanguages } : s
@@ -54,7 +51,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
             pages: prevService.pages + 1,
         }));
 
-        // Actualizar el contexto con el nuevo valor de páginas
         setServices(prevServices =>
             prevServices.map(s =>
                 s.id === serviceId ? { ...s, pages: service.pages + 1 } : s
@@ -69,7 +65,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
                 pages: prevService.pages - 1,
             }));
 
-            // Actualizar el contexto con el nuevo valor de páginas
             setServices(prevServices =>
                 prevServices.map(s =>
                     s.id === serviceId ? { ...s, pages: service.pages - 1 } : s
@@ -84,7 +79,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
             languages: prevService.languages + 1,
         }));
 
-        // Actualizar el contexto con el nuevo valor de lenguajes
         setServices(prevServices =>
             prevServices.map(s =>
                 s.id === serviceId ? { ...s, languages: service.languages + 1 } : s
@@ -99,7 +93,6 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
                 languages: prevService.languages - 1,
             }));
 
-            // Actualizar el contexto con el nuevo valor de lenguajes
             setServices(prevServices =>
                 prevServices.map(s =>
                     s.id === serviceId ? { ...s, languages: service.languages - 1 } : s
@@ -111,26 +104,32 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
     console.log('Services:', services);
 
     return (
-        <section className='flex flex-col items-end'>
-            <div>
-                <label>Nombre de páginas: </label>
-                <button type="button" onClick={decrementPages} className='border px-2 rounded-3xl'>-</button>
-                <input type="number" value={service.pages} onChange={handlePageChange} className='px-4 py-1 m-3 border rounded-lg' min={0} />
-                <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl'>+</button>
+        <section className='flex flex-col justify-between'>
+            <div className='flex items-center justify-between'>
+                <Modal 
+                title='Número de pagines' 
+                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
+                />
+                <label className='font-medium text-black mr-3'>Nombre de páginas: </label>
+                <div>
+                <button type="button" onClick={decrementPages} className='border px-2 rounded-3xl bg-white'>-</button>
+                <input type="number" value={service.pages} onChange={handlePageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
+                <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl bg-white'>+</button>
+                </div>
             </div>
+            <div className='flex items-center justify-between'>
             <Modal 
                 title='Número de pagines' 
-                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€." />
-            <div>
-                <label>Nombre de Lenguajes: </label>
-                <button type="button" onClick={decrementLanguages} className='border px-2 rounded-3xl'>-</button>
-                <input type="number" value={service.languages} onChange={handleLanguageChange} className='px-4 py-1 m-3 border rounded-lg' min={0} />
-                <button type="button" onClick={incrementLanguages} className='border px-2 rounded-3xl'>+</button>
+                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
+             />
+             <div>
+                
+             </div>
+                <label className='font-medium text-black mr-3'>Nombre de Lenguajes: </label>
+                <button type="button" onClick={decrementLanguages} className=' bg-white border px-2 rounded-3xl'>-</button>
+                <input type="number" value={service.languages} onChange={handleLanguageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
+                <button type="button" onClick={incrementLanguages} className='bg-white border px-2 rounded-3xl'>+</button>
             </div>
-            <Modal 
-                title='Número de llenguatges' 
-                text="Afegeix les llenguatges que tindrà el teu projecte. El cost de cada llenguatge és de 30€." 
-                />
         </section>
     );
 }
