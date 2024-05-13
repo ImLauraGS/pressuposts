@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Card, CardBody, Input, ListItem, Button,ButtonGroup } from "@material-tailwind/react";
 import { totalApi } from "../services/service";
 import { ServiceProps } from "../types/types";
+import { useNavigate } from "react-router-dom";
 import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
@@ -12,7 +13,13 @@ export default function ListPressupost() {
   const [sortedBudgets, setSortedBudgets] = useState<ServiceProps[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortByPriceActive, setSortByPriceActive] = useState<boolean>(false);
-  const [sortDirection, setSortDirection] = useState<string>("asc"); // Estado para el orden ascendente/descendente
+  const [sortDirection, setSortDirection] = useState<string>("asc"); 
+  const navigate = useNavigate();;
+
+  const handleBudgetClick = (budget) => {
+    const url = `/pressupostdetail?name=${budget.name}&email=${budget.email}&phone=${budget.phone}&date=${budget.date}&value=${budget.services.map(service => service.value).join(",")}&total=${budget.budgetTotal}`;
+    navigate(url);
+  };
 
   useEffect(() => {
     totalService.getTotal()
@@ -93,8 +100,8 @@ export default function ListPressupost() {
       </div>
 
         {filteredBudgets.map((item, index) => (
-          <Card key={index} className="mt-6 w-full bg-deep-purple-50 items-start" >
-            <CardBody className="w-[100%] flex flex-row justify-between align-top items-center">
+          <Card key={index} className="mt-6 w-full bg-deep-purple-50 items-start" onClick={() => handleBudgetClick(item)} >
+            <CardBody className="w-[100%] flex flex-row justify-between align-top">
               <div className="flex flex-col justify-start">
                 <Typography variant="h4" color="blue-gray" className="mb-2">
                   {item.name}
