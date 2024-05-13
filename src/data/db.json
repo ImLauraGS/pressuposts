@@ -21,44 +21,89 @@
   ],
   "budget": [
     {
-      "id": "23ab",
-      "name": "dfd",
-      "phone": "dfdf",
-      "email": "dfdf",
+      "id": "1134",
+      "name": "Juan Pérez",
+      "phone": "123456789",
+      "email": "juan@example.com",
+      "date": "2024-05-13",
       "services": [
         {
           "id": "1",
-          "pages": 2,
-          "languages": 2,
+          "pages": 4,
+          "languages": 1,
           "value": "Seo",
           "name": "Fer una campanya SEO",
           "price": 300
         },
         {
           "id": "2",
-          "pages": 2,
-          "languages": 2,
+          "pages": 1,
+          "languages": 1,
           "value": "Ads",
           "name": "Fer una campanya de publicitat",
           "price": 400
         }
       ],
-      "budgetTotal": 940
+      "budgetTotal": 910
     },
     {
-      "id": "99c6",
-      "name": "sasd",
-      "phone": "4543645",
-      "email": "asd@asdasd.sc",
+      "id": "30f4",
+      "name": "María García",
+      "phone": "987654321",
+      "email": "maria@example.com",
+      "date": "2024-05-13",
+      "services": [
+        {
+          "id": "3",
+          "pages": 2,
+          "languages": 1,
+          "value": "Web",
+          "name": "Fer una pàgina web",
+          "price": 500
+        },
+        {
+          "id": "2",
+          "pages": 1,
+          "languages": 1,
+          "value": "Ads",
+          "name": "Fer una campanya de publicitat",
+          "price": 400
+        }
+      ],
+      "budgetTotal": 1050
+    },
+    {
+      "id": "ace0",
+      "name": "Carlos Martínez",
+      "phone": "654123789",
+      "email": "carlos@example.com",
       "date": "2024-05-13",
       "services": [
         {
           "id": "1",
-          "pages": 2,
+          "pages": 1,
           "languages": 1,
           "value": "Seo",
           "name": "Fer una campanya SEO",
           "price": 300
+        }
+      ],
+      "budgetTotal": 360
+    },
+    {
+      "id": "d647",
+      "name": "Ana Garcia",
+      "phone": "44444444",
+      "email": "ana@exemple.es",
+      "date": "2024-05-13",
+      "services": [
+        {
+          "id": "2",
+          "pages": 1,
+          "languages": 2,
+          "value": "Ads",
+          "name": "Fer una campanya de publicitat",
+          "price": 400
         },
         {
           "id": "3",
@@ -69,33 +114,69 @@
           "price": 500
         }
       ],
-      "budgetTotal": 950
+      "budgetTotal": 1050
     },
     {
-      "id": "57f5",
-      "name": "dfg",
-      "phone": "5645645",
-      "email": "dfg@gfg.com",
+      "id": "023e",
+      "name": "Sandra Gomez",
+      "phone": "5675677467",
+      "email": "sandra@gmail.com",
       "date": "2024-05-13",
       "services": [
         {
-          "id": "3",
+          "id": "1",
+          "pages": 2,
+          "languages": 1,
+          "value": "Seo",
+          "name": "Fer una campanya SEO",
+          "price": 300
+        }
+      ],
+      "budgetTotal": 390
+    },
+    {
+      "id": "6d16",
+      "name": "Aitor Cortes",
+      "phone": "465456456",
+      "email": "aitor@example.com",
+      "date": "2024-05-13",
+      "services": [
+        {
+          "id": "2",
           "pages": 1,
+          "languages": 2,
+          "value": "Ads",
+          "name": "Fer una campanya de publicitat",
+          "price": 400
+        },
+        {
+          "id": "3",
+          "pages": 2,
           "languages": 1,
           "value": "Web",
           "name": "Fer una pàgina web",
           "price": 500
-        },
-        {
-          "id": "2",
-          "pages": 0,
-          "languages": 0,
-          "value": "Ads",
-          "name": "Fer una campanya de publicitat",
-          "price": 400
         }
       ],
-      "budgetTotal": 960
+      "budgetTotal": 1080
+    },
+    {
+      "id": "6756",
+      "name": "Laura Gil",
+      "phone": "5645645645",
+      "email": "laura@example.com",
+      "date": "2024-05-13",
+      "services": [
+        {
+          "id": "3",
+          "pages": 2,
+          "languages": 2,
+          "value": "Web",
+          "name": "Fer una pàgina web",
+          "price": 500
+        }
+      ],
+      "budgetTotal": 620
     }
   ]
 }

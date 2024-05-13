@@ -8,7 +8,7 @@ interface CheckboxContextType {
     setServices: Dispatch<SetStateAction<ServiceData[]>>;
     selectedService: ServiceProps | null;
     setSelectedService: Dispatch<SetStateAction<ServiceProps | null>>;
-    budgetTotal: number; // Agregar budgetTotal al contexto
+    budgetTotal: number; 
     setBudgetTotal: Dispatch<SetStateAction<number>>;
 }
 
@@ -25,7 +25,7 @@ const CheckboxContext = createContext<CheckboxContextType>({
     setServices: () => {},
     selectedService: null,
     setSelectedService: () => {},
-    budgetTotal: 0, // Establecer el valor predeterminado de budgetTotal
+    budgetTotal: 0, 
     setBudgetTotal: () => {},
     
 });
@@ -45,11 +45,11 @@ export const CheckboxProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const value = {
         checkedItems,
         setCheckedItems,
-        services: services.map(service => ({ ...defaultServiceData, ...service })), // Asegúrate de copiar todos los servicios con valores predeterminados
+        services: services.map(service => ({ ...defaultServiceData, ...service })), 
         setServices,
         selectedService,
         setSelectedService,
-        budgetTotal, // Agregar budgetTotal al valor del contexto
+        budgetTotal, 
         setBudgetTotal,
     };
 

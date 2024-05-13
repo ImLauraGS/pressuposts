@@ -13,7 +13,7 @@ import {
 export default function CheckboxService() {
     const serviceApi = servicesApi();
     const [dataApi, setDataApi] = useState<ServiceProps[]>([]);
-    const { checkedItems, setCheckedItems, setSelectedService, setServices, services } = useCheckboxContext();
+    const { checkedItems, setCheckedItems, setSelectedService, setServices } = useCheckboxContext();
 
     useEffect(() => {
         serviceApi.getAll()

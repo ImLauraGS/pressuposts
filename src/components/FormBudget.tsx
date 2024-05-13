@@ -51,14 +51,15 @@ export default function FormBudget() {
         }));
     }, []);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [target.name]: target.value,
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await totalService.postTotal({

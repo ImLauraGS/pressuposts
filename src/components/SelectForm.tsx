@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useCheckboxContext } from '../providers/CheckboxProvider';
 import { Modal } from './Modal';
+import { ServiceProps } from '../types/types';
 
 export default function SelectForm({ serviceId }: { serviceId: string }) {
     const { services, setServices } = useCheckboxContext();
-    const [service, setService] = useState<ServiceData>({
+    const [service, setService] = useState<ServiceProps>({
+        serviceApi: null,
+        name: "",
+        price: 0,
         id: serviceId,
+        value: "",
+        totalApi: null,
         pages: 0,
         languages: 0,
+        description: "",
+        budgetTotal: 0,
+        date: "",
+        email: "",
+        phone: "",
+        services: null,
     });
 
     useEffect(() => {
@@ -24,6 +36,7 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
             ...prevService,
             pages: selectedPages,
         }));
+
         setServices(prevServices =>
             prevServices.map(s =>
                 s.id === serviceId ? { ...s, pages: selectedPages } : s
@@ -101,34 +114,35 @@ export default function SelectForm({ serviceId }: { serviceId: string }) {
         }
     }
 
-    console.log('Services:', services);
-
     return (
-        <section className='flex flex-col justify-between'>
+        <section className='flex flex-col'>
             <div className='flex items-center justify-between'>
-                <Modal 
-                title='Número de pagines' 
-                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
-                />
-                <label className='font-medium text-black mr-3'>Nombre de páginas: </label>
                 <div>
-                <button type="button" onClick={decrementPages} className='border px-2 rounded-3xl bg-white'>-</button>
-                <input type="number" value={service.pages} onChange={handlePageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
-                <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl bg-white'>+</button>
+                    <Modal
+                        title='Número de pagines'
+                        text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
+                    />
+                    <label className='font-medium text-black mr-3'>Nombre de páginas: </label>
+                </div>
+                <div>
+                    <button type="button" onClick={decrementPages} className='border px-2 rounded-3xl bg-white'>-</button>
+                    <input type="number" value={service.pages} onChange={handlePageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
+                    <button type="button" onClick={incrementPages} className='border px-2 rounded-3xl bg-white'>+</button>
                 </div>
             </div>
             <div className='flex items-center justify-between'>
-            <Modal 
-                title='Número de pagines' 
-                text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
-             />
-             <div>
-                
-             </div>
-                <label className='font-medium text-black mr-3'>Nombre de Lenguajes: </label>
-                <button type="button" onClick={decrementLanguages} className=' bg-white border px-2 rounded-3xl'>-</button>
-                <input type="number" value={service.languages} onChange={handleLanguageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
-                <button type="button" onClick={incrementLanguages} className='bg-white border px-2 rounded-3xl'>+</button>
+                <div>
+                    <Modal
+                        title='Número de pagines'
+                        text="Afegeix les pàgines que necessitis per dur a terme el teu projecte. El cost de cada pàgina és de 30€."
+                    />
+                    <label className='font-medium text-black mr-3'>Nombre de Lenguajes: </label>
+                </div>
+                <div>
+                    <button type="button" onClick={decrementLanguages} className=' bg-white border px-2 rounded-3xl'>-</button>
+                    <input type="number" value={service.languages} onChange={handleLanguageChange} className='py-1 m-3 w-12 text-center border rounded-lg' min={0} />
+                    <button type="button" onClick={incrementLanguages} className='bg-white border px-2 rounded-3xl'>+</button>
+                </div>
             </div>
         </section>
     );

@@ -19,7 +19,7 @@ export const servicesApi = () => {
 export const totalApi =() => {
     const baseUrl ='http://localhost:3000/budget';
     
-    const postTotal = async (data) => {
+    const postTotal = async (data: object) => {
         try {
             const response = await axios.post(baseUrl, data);
             return response.data;

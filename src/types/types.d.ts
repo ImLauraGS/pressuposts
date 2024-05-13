@@ -5,15 +5,13 @@ export interface ServiceProps {
     id: string;
     value: string;
     totalApi: any;
-    totalPages: number;
-    totalLanguages: number;
     pages: number; 
     languages: number;
+    description: string;
+    budgetTotal: number;
+    date: string;
+    email: string;
+    phone: string;
+    services: any;
 }
 
-interface SelectedService {
-    id: string;
-    price: number;
-    value: string;
-    
-}
